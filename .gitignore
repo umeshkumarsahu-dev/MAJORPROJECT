@@ -1,0 +1,50 @@
+# Node.js (backend & frontend)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment Variables
+.env
+.env.*  # like .env.development, .env.production
+
+# Logs
+logs
+*.log
+debug.log
+error.log
+
+# OS Specific
+.DS_Store         # MacOS
+Thumbs.db         # Windows
+
+# Editor Files
+.vscode/
+.idea/
+*.swp
+
+# Build Files
+/dist
+/build
+/public/build
+
+# React Specific
+*.cache
+.cache/
+.eslintcache
+
+# Testing
+coverage/
+
+# Optional if using Parcel/Vite/Webpack
+.parcel-cache/
+.next/
+out/
+
+# Optional - PM2 or deployment
+pids
+*.pid
+*.seed
+
+# MongoDB local DB dumps (optional)
+dump/
