@@ -1,29 +1,31 @@
-< %- layout("/layouts/boilerplate") %>
+<%- layout("/layouts/boilerplate") %>
 
-  <body>
-    <h1>All Listings</h1>
-    <form method="GET" action="/listing/new">
-      <button>Create New Listing</button>
-    </form>
-    <div class="row  row-col-lg-3 row-col-md-2 row-col-sm-1">
-      <% for(let listing of allListings) { %>
-        <a class="listing-link" href="/listings/<%= listing._id %>">
-          <div class="card col">
-            <img src="<%= listing.image.url %>" class="card-img-top" alt="listing_image"
-              style="width:20rem; height:20rem;">
-            <div class="card-img-overlay"> </div>
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">
-                <b>
-                  <%= listing.title %>
-                </b> <br>
-                <%= listing.price.toLocaleString("en-IN") %> / night
-              </p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
+  <body class="bg-light">
+        <div class="container mt-5">
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="fw-bold">All Listings</h1>
+            <a href="/listings/new" class="btn btn-success">+ Create New Listing</a>
           </div>
-        </a>
-        <% } %>
-    </div>
+
+          <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            <% for(let listing of allListings) { %>
+              <div class="col">
+                <div class="card h-100 shadow-sm border-0">
+                  <a href="/listings/<%= listing._id %>">
+                    <img src="<%= listing.image.url %>" class="card-img-top" alt="listing_image"
+                      style="height: 250px; object-fit: cover;">
+                  </a>
+                  <div class="card-body">
+                    <h5 class="card-title text-primary">
+                      <%= listing.title %>
+                    </h5>
+                    <p class="card-text text-muted">₹<%= listing.price %> / night</p>
+                    <a href="/listings/<%= listing._id %>" class="btn btn-outline-primary w-100">View Details</a>
+                  </div>
+                </div>
+              </div>
+              <% } %>
+          </div>
+        </div>
+
   </body>

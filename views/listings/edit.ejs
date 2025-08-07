@@ -1,47 +1,97 @@
 <%- layout("/layouts/boilerplate") %>
 
-  <body>
-    <div class="row">
-      <div class="col-8 offset-2">
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-md-10 col-lg-8">
 
-        <h3>Edit a Listing</h3>
-        <form method="POST" action="/listings/<%= listing._id %>?_method=PUT">
-          <div class="mb-3">
-            <label for="title" class="form-label">Title</label>
-            <input class="form-control" type="text" name="listing[title]" value="<%= listing.title %>"
-              placeholder="enter title">
-          </div>
-          <div class="mb-3">
-            <label for="description" class="form-label">Description</label>
-            <textarea class="form-control" name="listing[description]"
-              placeholder="enter description"><%= listing.description %> </textarea>
-          </div>
-          <div class="mb-3">
-            <label for="image" class="form-label">Image</label>
-            <input class="form-control" type="text" name="listing[image]" value="<%= listing.image.url %>"
-              placeholder="enter image URL/Link">
-          </div>
-          <div class="mb-3">
-            <label for="price" class="form-label col-md-4">Price</label>
-            <input class="form-control" type="number" name="listing[price]" value="<%= listing.price %>"
-              name="enter price">
-          </div>
-          <div class="mb-3">
-            <label for="country" class="form-label col-md-8">Country</label>
-            <input class="form-control" type="number" name="listing[country]" value="<%= listing.country %>"
-              name="enter price">
-          </div>
-          <div class="mb-3">
-            <label for="location" class="form-label">Location</label>
-            <input class="form-control" type="text" name="listing[location]" value="<%= listing.location %>"
-              placeholder="enter location">
-          </div>
-          <br>
-          <br>
-          <button class="edi-btn btn btn-secondary mt-3">Edit</button>
-        </form>
+      <div class="card shadow-lg rounded-4">
+        <div class="card-body px-5 py-4">
+          <h3 class="text-center text-primary fw-bold mb-4">Edit Your Listing</h3>
+
+          <form method="POST" action="/listings/<%= listing._id %>?_method=PUT" class="needs-validation" novalidate enctype="multipart/form-data">
+
+            <!-- Title -->
+            <div class="mb-3">
+              <label for="title" class="form-label">Title</label>
+              <input id="title" class="form-control rounded-3" type="text" name="listing[title]" value="<%= listing.title %>"
+                placeholder="e.g., Lake View Cottage" required>
+              <small class="text-muted">Make it catchy and descriptive.</small>
+              <div class="valid-feedback">Great title!</div>
+              <div class="invalid-feedback">Please enter a valid title.</div>
+            </div>
+
+            <!-- Description -->
+            <div class="mb-3">
+              <label for="description" class="form-label">Description</label>
+              <textarea id="description" class="form-control rounded-3" name="listing[description]" rows="4"
+                placeholder="Write something about your space..." required><%= listing.description %></textarea>
+              <small class="text-muted">Highlight amenities, surroundings, etc.</small>
+              <div class="invalid-feedback">Please provide a description.</div>
+            </div>
+
+            <!-- Image -->
+            <div class="mb-3">
+              <label for="image" class="form-label">Upload New Image</label>
+              <input id="image" class="form-control rounded-3" type="file" name="listing[image]" 
+                placeholder="Paste an image URL">
+              <small class="text-muted">Use a high-resolution direct image link.</small>
+              <div class="valid-feedback">Image URL looks good!</div>
+              <div class="invalid-feedback">Enter a valid image link.</div>
+            </div>
+
+            <!-- Price -->
+            <div class="mb-3">
+              <label for="price" class="form-label">Price (per night)</label>
+              <input id="price" class="form-control rounded-3" type="number" name="listing[price]" value="<%= listing.price %>"
+                placeholder="₹ per night" required>
+              <div class="valid-feedback">Nice price!</div>
+              <div class="invalid-feedback">Enter a valid price.</div>
+            </div>
+
+            <!-- Country -->
+            <div class="mb-3">
+              <label for="country" class="form-label">Country</label>
+              <input id="country" class="form-control rounded-3" type="text" name="listing[country]" value="<%= listing.country %>"
+                placeholder="e.g., India" required>
+              <div class="valid-feedback">Looks good!</div>
+              <div class="invalid-feedback">Country name required.</div>
+            </div>
+
+            <!-- Location -->
+            <div class="mb-4">
+              <label for="location" class="form-label">Location</label>
+              <input id="location" class="form-control rounded-3" type="text" name="listing[location]" value="<%= listing.location %>"
+                placeholder="e.g., Goa, Baga Beach" required>
+              <div class="valid-feedback">Looks good!</div>
+              <div class="invalid-feedback">Location can't be empty.</div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="d-grid">
+              <button type="submit" class="btn btn-success btn-lg rounded-pill">Save Changes</button>
+            </div>
+
+          </form>
+        </div>
       </div>
-    </div>
-  </body>
 
-  </html>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap Validation Script -->
+<script>
+  (() => {
+    'use strict';
+    const forms = document.querySelectorAll('.needs-validation');
+    Array.from(forms).forEach(form => {
+      form.addEventListener('submit', event => {
+        if (!form.checkValidity()) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  })();
+</script>
